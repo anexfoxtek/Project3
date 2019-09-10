@@ -1,6 +1,5 @@
 # Project3
-Project 3 for UNC-C coding bootcamp
-
+Project 3
 
 
 Must use ReactJS in some way (even if minimal)
