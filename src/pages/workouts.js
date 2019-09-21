@@ -1,41 +1,64 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreator from "../../Store/action/index";
-import WorkoutCard from "../Project3/project3/src/card";
+import * as actionCreator from "../Store/action/index";
+
+import { Button, Icon } from "antd";
+import WorkoutCard from "./workoutCard";
+import Spinner from "../Components/WorkoutUI/Spinner/Spinner";
 
 class Workouts extends Component {
+  state = {
+    loading: true
+  };
   componentDidMount() {
+    this.setState({ loading: false });
     this.props.initializeWorkouts();
   }
   render() {
-    // Workout Array: has list of workouts with unique key
-    // Workout Keys: array of Keys
+    const { workouts, selectedWorkouts } = this.props;
+    let workoutList = <Spinner />;
 
-    const workoutArray = this.props.workouts;
-    const workoutKeys = workoutArray && Object.keys(workoutArray);
-    let workoutList = null;
-    if (workoutKeys) {
-      // workout list: array of ReactNode single workout
-      workoutList = workoutKeys.map((key, index) => {
-        const workout = Object.entries(workoutArray[key])[0];
-        const Reps_x_Sets = Object.entries(workoutArray[key])[1];
+    if (!this.props.loading && !this.state.loading && workouts) {
+      // WORKOUT-List: array of ReactNode single workout
+      workoutList = workouts.map((obj, index) => {
+        const { id, Workout, url } = obj;
+        const Reps_x_Sets = obj["Reps-x-Sets"];
+        const foundSelected = selectedWorkouts.find(obj => obj.id === id);
+        const checkSelected = foundSelected ? true : false;
         return (
           <WorkoutCard
-            key={`${key}_${index}`}
-            title={workout}
+            key={id}
+            title={Workout}
             description={Reps_x_Sets}
+            id={id}
+            url={url}
+            selected={checkSelected}
           />
         );
       });
     }
 
-    return <div className="Container">{workoutList}</div>;
+    return (
+      <div className="Container-wrapper">
+        <div className="Container">{workoutList}</div>
+        <Button
+          type="primary"
+          shape="round"
+          size="large"
+          onClick={() => this.props.history.push("/nutrition")}
+        >
+          Nutrition
+          <Icon type="swap-right" />
+        </Button>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
     workouts: state.workoutReducer.data,
+    selectedWorkouts: state.workoutReducer.selected,
     loaded: state.workoutReducer.loaded,
     loading: state.workoutReducer.loading,
     error: state.workoutReducer.error

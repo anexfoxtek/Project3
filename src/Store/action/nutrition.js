@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreator from "../Store/action/index";
+import * as actionCreator from "../../Store/action/index";
 
 // import { Button, Icon } from "antd";
 import NutritionList from "./nutritionList";
-import Spinner from "../Components/WorkoutUI/Spinner/Spinner";
-import SearchBox from "../Components/WorkoutUI/SearchBox";
+import Spinner from "../../component/WorkoutUI/Spinner/Spinner";
+import SearchBox from "../../component/WorkoutUI/SearchBox";
 
 class Workouts extends Component {
   state = {
