@@ -1,33 +1,99 @@
+@import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+h3 {
+  margin: 0px !important;
 }
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background: #04114b;
+  width: 100%;
+  height: 70px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  padding: 16px;
+  margin-bottom: 10px;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+}
+
+.Drawer-toggler {
+  font-size: 20px;
+  color: white !important;
+}
+.Drawer-Links-wrapper {
+  display: flex;
+  flex-flow: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  margin: 16px;
+}
+.Drawer-Links-wrapper > a {
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  color: #373636;
+}
+.active-links {
+  color: #1890ff !important;
+}
+.Dropdown_dropElement__ORYRK {
+  display: flex;
+  flex-flow: column !important;
 }
 
-.App-link {
-  color: #61dafb;
+.brand-logo {
+  color: white !important;
+}
+.Container-wrapper {
+  display: flex;
+  flex-flow: column;
+  margin-top: 90px;
+}
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 16px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-custom {
+  width: 180px !important;
+  margin: 12px;
+  /* border-color: #52c41a; */
+}
+
+.ant-card-actions > li {
+  margin: 0px !important;
+}
+.ant-btn {
+  margin: auto;
+}
+
+.ant-list {
+  width: 90%;
+  margin: auto;
+}
+
+.ant-list-item-action {
+  padding: 10px 0px;
+}
+
+.anticon-close,
+.anticon-plus {
+  vertical-align: 0.125em !important;
+}
+
+.search-bar-wrapper {
+  width: 60%;
+  margin: auto;
+}
+.search-bar-wrapper > * {
+  margin: 16px;
 }

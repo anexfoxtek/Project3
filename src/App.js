@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
-import Navigation from "./Navigation";
-import firebase from "./firebase";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-class App extends Component {
-  state = {
-    authenticated: false,
-  };
-  componentDidMount() {
-    console.log(this.state.authenticated);
-    firebase.auth().onAuthStateChanged((authenticated) => {
-      authenticated
-        ? this.setState(() => ({
-          authenticated: true,
-        }))
-        : this.setState(() => ({
-          authenticated: false
-        }))
-    })
-  }
-  render() {
-    return <Navigation authenticated={this.state.authenticated} />;
-  }
-}
+import Workouts from "./pages/workout/workouts";
+import Nutrition from "./pages/nutrition/nutrition";
+import Header from "./component/WorkoutUI/header";
+import "./App.css";
+
+const App = props => {
+  return (
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route exact path="/workouts" component={Workouts} />
+        <Route exact path="/nutrition" component={Nutrition} />
+        <Route path="/" component={Workouts} />
+      </Switch>
+    </div>
+  );
+};
 
 export default App;

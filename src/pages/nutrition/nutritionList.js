@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 import { message } from "flwww";
 import { List, Avatar, Icon } from "antd";
-import defaultThumbnail from "../asset/thumbail_nutrition.svg";
-import * as actionCreator from "../Store/action/index";
+import defaultThumbnail from "../../asset/thumbail_nutrition.svg";
+import * as actionCreator from "../../Store/action/index";
 
 const NutritionList = props => {
   return (

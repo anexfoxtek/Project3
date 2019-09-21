@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreator from "../Store/action/index";
+import * as actionCreator from "../../Store/action/index";
 
 import { Button, Icon } from "antd";
 import WorkoutCard from "./workoutCard";
-import Spinner from "../Components/WorkoutUI/Spinner/Spinner";
+import Spinner from "../../component/WorkoutUI/Spinner/Spinner";
 
 class Workouts extends Component {
   state = {

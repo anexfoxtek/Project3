@@ -1,48 +1,80 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as actionCreator from "../../Store/action/index";
+import * as actionTypes from "./actionTypes";
+import axios from "axios";
 
-// import { Button, Icon } from "antd";
-import NutritionList from "./nutritionList";
-import Spinner from "../../component/WorkoutUI/Spinner/Spinner";
-import SearchBox from "../../component/WorkoutUI/SearchBox";
-
-class Workouts extends Component {
-  state = {
-    loading: true
+const initNutrition = data => {
+  return {
+    type: actionTypes.INIT_NUTRITION
   };
-  componentDidMount() {
-    this.setState({ loading: false });
-    this.props.initializeNutrition();
-  }
-  render() {
-    let nutritionList = <Spinner />;
-    if (!this.props.loading && !this.state.loading) {
-      nutritionList = <NutritionList reciepeList={this.props.reciepeList} />;
+};
+const nutritionSuccess = data => {
+  return {
+    type: actionTypes.FETCH_NUTRITION_SUCCESS,
+    payload: { data }
+  };
+};
+const nutritionFail = error => {
+  return {
+    type: actionTypes.FETCH_NUTRITION_FAIL,
+    payload: { error }
+  };
+};
+export const initNutritionAsync = params => {
+  const ings = params ? params.i : "chicken";
+  const query = params ? params.q : "health";
+  return (dispatch, getState) => {
+    //TODO# HERE MAKE ASYNC CALLS.
+    dispatch(initNutrition());
+    axios({
+      method: "GET",
+      url: "https://recipe-puppy.p.rapidapi.com",
+      params: {
+        p: 1,
+        i: ings,
+        q: query
+      },
+      headers: {
+        "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
+        "x-rapidapi-key": "746a1a9cfdmshdbc2b867d806313p1e07dfjsn0db7de901c8d"
+      }
+    })
+      .then(response => {
+        const { results } = response.data;
+        const dataWithId = results.map((obj, index) => {
+          const id = obj["title"]
+            .trim()
+            .split(" ")
+            .join("");
+          return {
+            id,
+            ...obj
+          };
+        });
+        dispatch(nutritionSuccess(dataWithId));
+      })
+      .catch(err => {
+        dispatch(nutritionFail(err));
+      });
+  };
+};
+
+export const selectedNutrition = id => {
+  return {
+    type: actionTypes.SELECTED_NUTRITION,
+    payload: {
+      id
     }
-
-    return (
-      <div className="Container-wrapper">
-        <SearchBox />
-        {nutritionList}
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    loading: state.nutritionReducer.loading,
-    reciepeList: state.nutritionReducer.data
   };
 };
-const mapDispatchToProps = dispatch => {
+export const deselectedNutrition = id => {
   return {
-    initializeNutrition: () => dispatch(actionCreator.initNutritionAsync())
+    type: actionTypes.DE_SELECTED_NUTRITION,
+    payload: {
+      id
+    }
   };
 };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Workouts);
+export const clearSelectedNutrition = () => {
+  return {
+    type: actionTypes.CLEAR_SELECTED_NUTRITION
+  };
+};

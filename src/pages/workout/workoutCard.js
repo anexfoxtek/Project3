@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { message } from "flwww";
 import { Card, Icon, Tooltip } from "antd";
 
-import * as actionCreator from "../Store/action/index";
+import * as actionCreator from "../../Store/action/index";
 // import workout_card from "../asset/workout_card.svg";
 //const workout_card = "https://media.giphy.com/media/7SrW2AY3m5CY8/giphy.gif";
 const { Meta } = Card;

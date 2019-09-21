@@ -87,7 +87,7 @@ const Header = props => {
       />
       <div className="brand-logo">
         <Title level={3} style={{ color: "white" }}>
-         NO PAIN NO GAIN APP
+          NO PAIN NO GAIN APP
         </Title>
       </div>
       <div>

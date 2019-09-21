@@ -1,5 +1,5 @@
 import * as actionTypes from "../action/actionTypes";
-import { updateObject } from "../../../src/asset/utility";
+import { updateObject } from "../../asset/utility";
 const getSelectedFromlocalStorage = JSON.parse(
   localStorage.getItem("workouts")
 );
