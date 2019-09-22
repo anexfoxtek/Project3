@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Badge, Dropdown } from "flwww";
 import { Icon, Typography } from "antd";
 import Drawer from "./drawer";
@@ -30,7 +31,7 @@ const Header = props => {
     backgroundColor: maxCountFav ? "#fff" : "#e84f34",
     right: "-2px"
   };
-
+  const FavIconStyle = {};
   const workoutFavList = (
     <div>
       <span>
@@ -79,18 +80,24 @@ const Header = props => {
   );
   return (
     <header className="App-header">
-      <Drawer drawerIsVisible={drawerIsVisible} toggleDrawer={toggleDrawer} />
+      <Drawer
+        drawerIsVisible={drawerIsVisible}
+        toggleDrawer={toggleDrawer}
+        authenticated={props.authenticated}
+      />
       <Icon
         className="Drawer-toggler"
         type="align-left"
         onClick={toggleDrawer}
       />
       <div className="brand-logo">
-        <Title level={3} style={{ color: "white" }}>
-          NO PAIN NO GAIN APP
-        </Title>
+        <Link to="/">
+          <Title level={3} style={{ color: "white" }}>
+            MISSION SLIM POSSIBLE
+          </Title>
+        </Link>
       </div>
-      <div>
+      <div style={{ visibility: props.authenticated ? "visible" : "hidden" }}>
         <Dropdown
           elementList={[workoutFavList, nutritionFavList]}
           position="bottom-right"

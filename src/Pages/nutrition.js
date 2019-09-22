@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreator from "../../Store/action/index";
+import * as actionCreator from "../Store/action/index";
 
 // import { Button, Icon } from "antd";
 import NutritionList from "./nutritionList";
-import Spinner from "../../component/WorkoutUI/Spinner/Spinner";
-import SearchBox from "../../component/WorkoutUI/SearchBox";
+import Spinner from "../Components/WorkoutUI/Spinner/Spinner";
+import SearchBox from "../Components/WorkoutUI/SearchBox";
 
-class Workouts extends Component {
+class nutrition extends Component {
   state = {
     loading: true
   };
@@ -16,9 +16,10 @@ class Workouts extends Component {
     this.props.initializeNutrition();
   }
   render() {
+    // console.log(this.props.reciepeList);
     let nutritionList = <Spinner />;
     if (!this.props.loading && !this.state.loading) {
-      nutritionList = <NutritionList reciepeList={this.props.reciepeList} />;
+      nutritionList = <NutritionList recipeList={this.props.recipeList} />;
     }
 
     return (
@@ -33,7 +34,7 @@ class Workouts extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.nutritionReducer.loading,
-    reciepeList: state.nutritionReducer.data
+    recipeList: state.nutritionReducer.data
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -45,4 +46,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Workouts);
+)(nutrition);

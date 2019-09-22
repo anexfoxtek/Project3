@@ -3,16 +3,13 @@ import { connect } from "react-redux";
 import { message } from "flwww";
 import { Card, Icon, Tooltip } from "antd";
 
-import * as actionCreator from "../../Store/action/index";
+import * as actionCreator from "../Store/action/index";
 // import workout_card from "../asset/workout_card.svg";
-//const workout_card = "https://media.giphy.com/media/7SrW2AY3m5CY8/giphy.gif";
+const workout_card = "https://media.giphy.com/media/7SrW2AY3m5CY8/giphy.gif";
 const { Meta } = Card;
 
 const Item = props => {
-  const { title, description, id, selected, url } = props;
-  const workout_card = url
-    ? url
-    : "https://media.giphy.com/media/7SrW2AY3m5CY8/giphy.gif";
+  const { title, description, id, selected } = props;
   const onSelected = () => {
     props.maxCountSelection
       ? message("You Selected Out Of 10.", "error")
