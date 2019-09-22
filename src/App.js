@@ -31,7 +31,7 @@ class App extends Component {
       <Router>
         <div style={{ marginTop: "90px" }}>
           <Wrapper>
-            {/* # THIS HEADER COMPONENT IS A COMPLETED PLEASE GO TO "./Components/WorkoutUI/header" 
+            {/* goto "./Components/WorkoutUI/header" 
               and only copy the previous NavLink and define your route in 'to' attribute  */}
             <Header authenticated={this.props.authenticated} />
             <Switch>
